@@ -11,7 +11,9 @@ public class LogicaArma : MonoBehaviour
     public bool tiempoNoDisparo = false;
     public bool puedeDisparar = false;
     public bool recargando = false;
-   
+    public Transform puntodeDisparo;
+    public Rigidbody balaPrefab;
+
 
     [Header("Referencia de Objetos")]  //Se usa para dar titulos y ordenar las variables 
     public ParticleSystem fuegoArma;
@@ -41,8 +43,12 @@ public class LogicaArma : MonoBehaviour
     void Update()
     {
         RevisarDisparo();
-        
+        if (Input.GetKey(KeyCode.M))
+        {
+            Instantiate(balaPrefab, puntodeDisparo.position, Quaternion.identity);
 
+
+        }
     }
 
     void HabilitarArma()
@@ -68,9 +74,28 @@ public class LogicaArma : MonoBehaviour
         ReproducirAnimacionDisparo();
         balasEnCartucho--;
         StartCoroutine(ReiniarTiempoNoDisparo());
+        DisparoDirecto();
 
     }
 
+     void DisparoDirecto()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(puntodeDisparo.position, puntodeDisparo.forward, out hit ))
+        {
+            if (hit.transform.CompareTag("Enemigo"))
+            {
+                Vida vida = hit.transform.GetComponent<Vida>();
+                if(vida == null) {
+                    throw new System.Exception("No se encontro el componente vida del enemigo");
+                }
+                else
+                {
+                    vida.recibirDano(daño);
+                }
+            }
+        }
+    }
 
     public virtual void ReproducirAnimacionDisparo()
     {

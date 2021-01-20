@@ -11,6 +11,7 @@ public class LogicaJugador : MonoBehaviour
     public float movimiento = 1f;
     public float rotacion = 5f;
     private Animator animadorRender;
+    public Rigidbody balaPrefab;
     
     
     // Start is called before the first frame update
@@ -30,9 +31,10 @@ public class LogicaJugador : MonoBehaviour
         if (Input.GetKey(KeyCode.Space))
         {
             animadorRender.SetTrigger("Desenfundar");
-            //if (Input.GetKey(KeyCode.M)) {
-               // animadorRender.SetTrigger("Dispara");
-           // }
+            Instantiate(balaPrefab);
+            if (Input.GetKey(KeyCode.M)) {
+                animadorRender.SetTrigger("Dispara");
+           }
 
         }
     }
