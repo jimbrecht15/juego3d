@@ -25,7 +25,7 @@ public class Vida : MonoBehaviour {
         if (valor <0)
         {
             valor = 0;
-          
         }
+
     }
 }

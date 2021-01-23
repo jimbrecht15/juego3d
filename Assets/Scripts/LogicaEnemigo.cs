@@ -18,7 +18,6 @@ public class LogicaEnemigo : MonoBehaviour
     public float speed = 1.0f;
     public float angularSpeed = 120;
     public float dano = 25;
-    
     public bool mirando; 
 
 
@@ -42,6 +41,7 @@ public class LogicaEnemigo : MonoBehaviour
         vida = GetComponent<Vida>();
         animator = GetComponent<Animator>();
         collider = GetComponent<Collider>();
+       
     }
 
     // Update is called once per frame
@@ -51,7 +51,9 @@ public class LogicaEnemigo : MonoBehaviour
         revisarAtaque();
         perseguir();
         estaFrentealAjugador();
+       
     }
+
 
     private void revisarAtaque()
     {
@@ -100,6 +102,7 @@ public class LogicaEnemigo : MonoBehaviour
             agente.isStopped = true;
             collider.enabled = false;
             animator.CrossFadeInFixedTime("Vida0", 0.1f);
+            logicaJugador.destruidos++;
             Destroy(gameObject, 3f);
         }
     }
