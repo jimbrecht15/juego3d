@@ -15,6 +15,6 @@ public class Menu : MonoBehaviour
 
     public void ReiniciarButton()
     {
-        SceneManager.LoadScene("_Complete-Game");
+       SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
